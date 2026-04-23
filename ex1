@@ -1,0 +1,78 @@
+#importação de biblioteca
+import os
+
+#Algoritmo quadrado10_100
+#declarar
+cta: int = 10
+quadrado: int = 0
+dir: str = ''
+arq: str = ''
+pasta: str = ''
+pastas: str = ''
+
+def arquivo(entrada):
+    global dir
+    global arq
+    tipo: str = ''
+    arquivo: str = ''
+    enc: str = ''
+    conteudo: str = ''
+    dir = 'C:\\tmp\\'
+    arq = 'exercicio1.txt'
+
+    #tornar entrada em string
+    entrada = str(entrada)
+
+    if (os.path.exists(dir) and os.path.isdir(dir)):
+        tipo = 'w'
+        arquivo = dir + arq
+        enc = 'utf-8'
+        if (os.path.exists(arquivo)):
+            tipo = 'a'
+        
+        conteudo = conteudo + entrada + '\n'
+        with open (arquivo, tipo, encoding=enc) as file:
+            file.write(conteudo)
+
+def reiniciando_arquivo(entrada):
+    global arq
+    global dir
+    tipo: str = ''
+    enc: str = ''
+    conteudo: str = ''
+    arq = 'exercicio1.txt'
+    dir = 'C:\\tmp\\'
+
+    #tornar entrada em string
+    entrada = str(entrada)
+
+    if(os.path.exists(dir) and os.path.isdir(dir)):
+        tipo = 'w'
+        arquivo = dir + arq
+        enc = 'utf-8'
+
+        conteudo = entrada + '\n'
+        with open (arquivo, tipo, encoding=enc) as file:
+            file.write(conteudo)
+
+
+def main():
+    global quadrado
+    global cta
+    global pasta
+    global pastas
+ 
+    pastas = 'C:\\tmp\\'
+    os.makedirs(pastas, exist_ok = True)
+    os.chmod(pastas, 0o744)
+
+    while cta < 151:
+        quadrado = cta**2
+        if (cta == 10):
+            reiniciando_arquivo(quadrado)
+        cta += 1
+        arquivo(quadrado)
+
+
+if (__name__ == '__main__'):
+    main()
